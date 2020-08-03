@@ -1,0 +1,58 @@
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: simple-api
+    labels:
+        app: simple-api
+  spec:
+    selector:
+      app: simple-api
+    type: NodePort
+    ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+---
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: simple-api
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: simple-api
+    template:
+      metadata:
+        labels:
+          app: simple-api
+      spec:
+        containers:
+        - name: loopback-api-kube
+          image: image-file-overwritten-by-ibm-cloud-cicd
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 3000
+          env:
+            - name: ENVIROMENT
+              value: DEV
+            - name: NODE_ENV
+              value: development
+            - name: PORT
+              value: "3000"
+            - name: CLOUDANT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: cloudant_url
+            - name: CLOUDANT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: cloudant_user
+            - name: CLOUDANT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: cloudant_password
