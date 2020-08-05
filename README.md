@@ -100,7 +100,7 @@ To configure the IBM Cloud toolchain automation, follow these instructions:
 ![image](./images/pick-a-template.png)
 1. Next, add a Toolchain Name *(e.g. simple-api)*. Keep all the other options as is.
 ![image](./images/toolchain-config1.png)
-1. Next, provide an existing IBM Cloud API key or create a new key [(link on instructions)](https://cloud.ibm.com/docs/account?topic=account-userapikey). You can also, create a new key in this screen.
+1. Next, provide an existing IBM Cloud API key or create a new key [(link on instructions)](https://cloud.ibm.com/docs/account?topic=account-userapikey). You can also, create a new key in this screen, by clicking the **| New+ |** button.
 ![image](./images/toolchain-config2.png)
 1. Next, select a valid container registry-region (location doesn't have to match the cluster location)
 ![image](./images/toolchain-config3.png)
@@ -108,6 +108,12 @@ To configure the IBM Cloud toolchain automation, follow these instructions:
 1. Next, ensure cluster region, resource group, and cluster name all match your target cluster
 Important: your cluster namespace must match the kubernetes namespace you used to store your kubernets secrets
 1. Next, click **| Create |**
+
+> Now that that the toolchain configuration is completed, you can follow progress and see detailed logging information by stage. From the toolchain Overview page, Click on the **|  Delivery Pipeline  |** box. You will be presented with the Delivery Pipeline page.
+>![image](./images/toolchain-progress.png)
+> From this page, and after all the stages have completed successfuly, click on the **DEPLOY** box, `view logs and history` to access the latest logs. To access the simple-app page, scroll all the way down towards the end of the log and click on the provided **IP Address**.
+>![image](./images/container-address.png)
+
 
 > what could go wrong?
 > * containers can't access your secrets (secrets created on the wrong namespace)
