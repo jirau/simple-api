@@ -49,7 +49,7 @@ Kubernetes Secrets allow us to store and manage sensitive information, such as p
 > **Note on service credentials and secrets:**<br>
 > Never commit service credentials and secrets dependencies into your code repository. It is suggested that you create a secrets yaml file in your local workstation and store it in a secure location, such as storage media or a object storage cloud service that supports encryption at rest to avoid unauthorized access.
 
-We will need to configure three **(3) Kubernetes secrets** to store our Cloudant services credentials, to enable access from the simple-api microservice container to the Database. These 3 variables are, 1) *cloudant_url*, 2) *cloudant_user*, 3) *cloudant_password*
+We will need to configure three **(3) Kubernetes secrets** to store our Cloudant services credentials, to enable access from the simple-api microservice container to the Database. These 3 variables are, 1) *cloudant_url*, 2) *cloudant_user*, and 3) *cloudant_password*
 
 **Generating Kubernetes Secrets**<br>
 Secrets in kubernetes must be encoded in base64. To generate the base64 encoded strings in MacOS or Linux, open the terminal and execute the following commands for the 3 required credentials.<br> Alternatively, you can use a base64 online encoder.
@@ -69,6 +69,8 @@ data:
   cloudant_user: <add corresponding base64 encoded string here>
   cloudant_password: <add corresponding base64 encoded string here>
 ```
+> **Note on the following step:** Before, you can apply the configured secrets, you must be logged into your IBM Kubernetes Service cluster via the **IBM Cloud CLI** tool. For instructions on how to do this, log into your IBM Cloud account, open the target IKS cluster and then click on **Access** from the left menu and follow the logging intructions.
+
 Once you have the yaml file with the required encoded credentials, we can now proceed and apply it to our cluster, by using the following kubectl command:<br>
 ```shell
 $ kubectl apply -f <secret-file-name>.yaml
@@ -82,10 +84,10 @@ $ kubectl create secret generic mysecret --from-literal='cloudant_url=<url-strin
 
 ### Step 3: Configuring the IBM Automated Toolchain
 > We will use the toolchain clone option, to clone or copy the simple-api [code](https://github.com/jirau/simple-api.git)  into our own repository. As an alterntive, you could clone the code outside of the toolchain process and select the *Existing* repository option. (you will need to authorize the toolchain to access your repository)<br>
-To simplify and to ensure tutorial completion success, we recommend you first follow the intructions as is, by using the clone option.
+> **note:** To simplify and to ensure tutorial completion success, we recommend you first follow the intructions as is, by using the clone option. You can then use these instructions to deploy your own projects, by simply selecting the Existing repository option.
 
 **Please be aware of the the following IBM Cloud toolchain dependencies for deploying containers on your IKS cluster:**<br>
-There are two files that are required by the toolchain automation to deploy our microservice on the IBM Kuberenetes Service cluster. These two files are, a 1) **Dockerfile** and a 2) **deployment.yaml**
+There are two files that are required by the toolchain automation to deploy our microservice on the IBM Kuberenetes Service cluster. These two files are, a 1) **Dockerfile** and a 2) **deployment.yaml**. <br>
 Docker builds images automatically by reading the instructions from the **Dockerfile**. The **Dockerfile** contains all the instructions and specifications, needed to build a given image.<br>
 The **deployment.yaml** includes the Kubernetes deployment and service API objects with the specifications for our cluster master node to provision and manage our microservice resources. Additional objects could be added under this file, by using the **---** triple dash separator.
 
