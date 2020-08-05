@@ -35,10 +35,6 @@
           ports:
           - containerPort: 3000
           env:
-            - name: ENVIROMENT
-              value: DEV
-            - name: NODE_ENV
-              value: development
             - name: PORT
               value: "3000"
             - name: CLOUDANT_URL
