@@ -52,11 +52,11 @@ Kubernetes Secrets allow us to store and manage sensitive information, such as p
 We will need to configure three **(3) Kubernetes secrets** to store our Cloudant services credentials, to enable access from the simple-api microservice container to the Database. These 3 variables are, 1) *cloudant_url*, 2) *cloudant_user*, 3) *cloudant_password*
 
 **Generating Kubernetes Secrets**<br>
-Secrets in kubernetes must be encoded in base64. To generate the base64 encoded strings in MacOS or Linux, open the terminal and execute the following commands for the 3 required credentials. Alternatively, you can use a base64 online encoder.
+Secrets in kubernetes must be encoded in base64. To generate the base64 encoded strings in MacOS or Linux, open the terminal and execute the following commands for the 3 required credentials.<br> Alternatively, you can use a base64 online encoder.
 ```shell
 $ echo -n < secret-string > | base64
 ```
-Then, add the encoded strings to the corresponding data element in a Secret yaml file. note: you will need to create this file as it is not included in the code repository. Do not commit this file, keep separate from your code.
+Then, add the encoded strings to the corresponding data element in a Secret yaml file. note: you will need to create this file as it is not included in the code repository. Do not commit this file with your code.
 
 ```yml
 apiVersion: v1
@@ -69,8 +69,7 @@ data:
   cloudant_user: <add corresponding base64 encoded string here>
   cloudant_password: <add corresponding base64 encoded string here>
 ```
-Once you have the file with the required encoded credentials, we now can apply it to our cluster.
-Use the following kubectl command:
+Once you have the yaml file with the required encoded credentials, we can now proceed and apply it to our cluster, by using the following kubectl command:<br>
 ```shell
 $ kubectl apply -f <secret-file-name>.yaml
 ```
@@ -79,13 +78,13 @@ Alternatively, you can also set secrets using the following imperative kubectl c
 $ kubectl create secret generic mysecret --from-literal='cloudant_url=<url-string>' --from-literal='cloudant_user=<user-name-string>' --from-literal='cloudant_password=<password-string>'
 ```
 
-[For detailed instructions on creating and managing Kubernetes secrets](https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/)
+[Click this link, for detailed instructions on creating and managing Kubernetes secrets](https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/)
 
 ### Step 3: Configuring the IBM Automated Toolchain
-> We will use the toolchain clone option, to clone the simple-api [code](https://github.com/jirau/simple-api.git)  into your own repository. As an alterntive, you could clone the code outside of the toolchain process and select the Existing repository option. (you will need to authorize the toolchain to access your repository)<br>
-To simplify and to ensure tutorial success, we recommend you first follow the intructions as is and use the clone option within the toolchain.
+> We will use the toolchain clone option, to clone or copy the simple-api [code](https://github.com/jirau/simple-api.git)  into our own repository. As an alterntive, you could clone the code outside of the toolchain process and select the *Existing* repository option. (you will need to authorize the toolchain to access your repository)<br>
+To simplify and to ensure tutorial completion success, we recommend you first follow the intructions as is, by using the clone option.
 
-**Please be aware of the the followibg IBM Cloud toolchain dependencies for deploying containers on your IKS cluster:**
+**Please be aware of the the following IBM Cloud toolchain dependencies for deploying containers on your IKS cluster:**
 There are two files that are required by the toolchain automation to deploy our microservice on the IBM Kuberenetes Service cluster. These two files are, a 1) **Dockerfile** and a 2) **deployment.yaml**
 Docker builds images automatically by reading the instructions from the **Dockerfile**. The **Dockerfile** contains all the instructions and specifications, needed to build a given image.<br>
 The **deployment.yaml** includes the Kubernetes deployment and service API objects with the specifications for our cluster master node to provision and manage our microservice resources. Additional objects could be added under this file, by using the **---** triple dash separator.
