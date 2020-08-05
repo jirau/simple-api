@@ -84,7 +84,7 @@ $ kubectl create secret generic mysecret --from-literal='cloudant_url=<url-strin
 > We will use the toolchain clone option, to clone or copy the simple-api [code](https://github.com/jirau/simple-api.git)  into our own repository. As an alterntive, you could clone the code outside of the toolchain process and select the *Existing* repository option. (you will need to authorize the toolchain to access your repository)<br>
 To simplify and to ensure tutorial completion success, we recommend you first follow the intructions as is, by using the clone option.
 
-**Please be aware of the the following IBM Cloud toolchain dependencies for deploying containers on your IKS cluster:**
+**Please be aware of the the following IBM Cloud toolchain dependencies for deploying containers on your IKS cluster:**<br>
 There are two files that are required by the toolchain automation to deploy our microservice on the IBM Kuberenetes Service cluster. These two files are, a 1) **Dockerfile** and a 2) **deployment.yaml**
 Docker builds images automatically by reading the instructions from the **Dockerfile**. The **Dockerfile** contains all the instructions and specifications, needed to build a given image.<br>
 The **deployment.yaml** includes the Kubernetes deployment and service API objects with the specifications for our cluster master node to provision and manage our microservice resources. Additional objects could be added under this file, by using the **---** triple dash separator.
@@ -95,16 +95,21 @@ To configure the IBM Cloud toolchain automation, follow these instructions:
 1. Log into IBM Cloud with your credentials
 1. Navigate to your target IKS cluster overview page
 1. Click on devops, from the left side menu
-1. Click on Create a toolchain+ button
-1. Click on the Develop a Kubernete app box
-1. Add a Toolchain Name (e.g. simple-api)
-1. provide an existing IBM Cloud API key or create a new key (link on instructions)
-1. select a valid container registry-region (location doesn't have to match the cluster location)
-1. select a valid registry namespace where you would like to have the toolchain upload images to
-1. ensure cluster region, resource group, and cluster name all match your target cluster
-1. Important: cluster namespace must match the kubernetes namespace you use for secrets
+1. Click on **|Create a toolchain+|** button
+1. Click on the **|  Develop a Kubernete App  |** box
+![image](./images/pick-a-template.png)
+1. Next, add a Toolchain Name *(e.g. simple-api)*. Keep all the other options as is.
+![image](./images/toolchain-config1.png)
+1. Next, provide an existing IBM Cloud API key or create a new key [(link on instructions)](https://cloud.ibm.com/docs/account?topic=account-userapikey). You can also, create a new key in this screen.
+![image](./images/toolchain-config2.png)
+1. Next, select a valid container registry-region (location doesn't have to match the cluster location)
+![image](./images/toolchain-config3.png)
+1. Next, select a valid registry namespace where you would like to have the toolchain upload images to
+1. Next, ensure cluster region, resource group, and cluster name all match your target cluster
+Important: your cluster namespace must match the kubernetes namespace you used to store your kubernets secrets
+1. Next, click **| Create |**
 
-what could go wrong?
-- containers can't access your secrets (secrets created on the wrong namespace)
+> what could go wrong?
+> * containers can't access your secrets (secrets created on the wrong namespace)
 
 
