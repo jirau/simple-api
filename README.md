@@ -1,3 +1,5 @@
+<h2>Draft: Not Ready</h2>
+
 <h3>Tutorial: Deploying a cloud-native microservice in the IBM Kubernetes Service, going beyond deployment a Hello World container.</h3>
 
 <p>By following this tutorial, you will be able to exercise all the steps necessary to deploy a cloud-native microservice in the IBM Kubernetes Service by leveraging the IBM Cloud toolchain automation.</p>
@@ -52,7 +54,7 @@ The deployment.yaml provides the
 
 </p>
 
-```
+```yaml
 apiVersion: v1
 kind: Secret
 metadata:
