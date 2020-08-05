@@ -114,6 +114,11 @@ Important: your cluster namespace must match the kubernetes namespace you used t
 > From this page, and after all the stages have completed successfuly, click on the **DEPLOY** box, `view logs and history` to access the latest logs. To access the simple-app page, scroll all the way down towards the end of the log and click on the provided **IP Address**.
 >![image](./images/container-address.png)
 
+After clicking on the microservice IP Address, you will be presented with our simple-api **home page**.
+![image](./images/loopback-screen.png)
+
+From the home-page, and to test that the simple-api can connect to our Cloudant Database Service, click on the **explorer** link. You can now interact with the database via the [swagger interface](https://swagger.io/tools/swagger-ui/).
+
 
 > what could go wrong?
 > * containers can't access your secrets (secrets created on the wrong namespace)
