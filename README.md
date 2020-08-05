@@ -2,7 +2,7 @@
 
 <h3>Tutorial: Deploying a cloud-native microservice in the IBM Kubernetes Service, going beyond deploying a Hello World application container.</h3>
 
-<p>By following this tutorial, you will be able to exercise all the steps necessary to deploy a cloud-native microservice in the IBM Kubernetes Service by leveraging the IBM Cloud toolchain automation.</p>
+<p>By following this tutorial, you will be able to exercise all the steps necessary to deploy a cloud-native microservice in the IBM Kubernetes Service (IKS) by leveraging IBM Cloud's toolchain automation.</p>
 <br>
 <b>Prerequisites</b>
 <li>You will need an IBM Cloud Account. If you don't have one, you can sign up for a free trial.</li>
@@ -13,7 +13,7 @@
 <p>For this tutorial, we will be deploying a simple cloud-native application, using the IBM Cloud toolchain to containerize, store the image on a private container registry and then deploy it to our target Kubernetes cluster. </p>
 
 <p>We will use the code stored in this repository as our sample application microservice, which we will refer to as the <b>simple-api</b>.</p>
-<p>The simple-api is a basic microservice that exposes data via a http RESTful API. The API is based on the loopback4 framework. You can find more information about the loopback framework here (https://loopback.io/). In conjunction with the api, an IBM Cloud Cloudant Database will be used as the data store.</p>
+<p>The simple-api is a basic nodejs microservice that exposes data via a http RESTful API. The API is based on the loopback4 framework. You can find more information about the loopback framework here (https://loopback.io/). In conjunction with the api, an IBM Cloud Cloudant Database will be used as the data store.</p>
 <p>To start, we need to provision our Database service.</p>
 <p><b>Provisioning and Configuring the IBM Cloudant Service</b></p>
 <li>Log into your IBM Cloud Account</li>
@@ -36,17 +36,18 @@
 <li>On the Create Database window, enter <b>'items'</b> (ensure all lower caps) as the Database name, click on the Non-partitioned radio button, then click the Create button</li>
 <li>You can now close the dashboard, as no other steps are needed related to the Cloudant service.</li>
 
-<p><b>Configuring the application code</b></p>
-<li>Navigate to https://github.com/jirau/simple-api.git and clone the repository into your own repository</li>
-<li>You will need to authorize the IBM Cloud toolchain tool to access your repo in a later step. The toolchain will need to have access to our code to be able to build our Docker container image.</li>
+<p><b>Overview of the application code</b><br>
+We will use the toolchain clone option, to clone the code https://github.com/jirau/simple-api.git  into your own repository. As an alterntive, you could clone the code outside of the toolchain process and select the Existing repository option. (you will need to authorize the toolchain to access your repository)<br>
+To simplify and to ensure tutorial success, we recommend you first follow the intructions as is and use the clone option within the toolchain.
+</p>
 
-<p>Note on toolchain dependencies: Dockerfile, and deployment.yaml<br>
-There are two files that are required by the toolchain automation to deploy our microservice on the IBM Kuberenetes Service. These two files are, a 1)<b>Dockerfile</b> and a 2) <b>deployment.yaml</b></p>
-<p>Docker builds images automatically by reading the instructions from the Dockerfile. The <b>Dockerfile</b> contains all the instructions, needed to build a given image.</p>
-<p>The <b>deployment.yaml</b> includes the Kubernetes deployment and service API objects with the specifications for the cluster master node to provision and manage our microservice resources. Additional objects could be added under this file, by using the <b>---</b> triple dash separator. </p>
+<p>Note on IBM Cloud toolchain dependencies for deploying containers on your IKS cluster: <br>
+There are two files that are required by the toolchain automation to deploy our microservice on the IBM Kuberenetes Service cluster. These two files are, a 1)<b>Dockerfile</b> and a 2) <b>deployment.yaml</b></p>
+<p>Docker builds images automatically by reading the instructions from the Dockerfile. The <b>Dockerfile</b> contains all the instructions and specifications, needed to build a given image.</p>
+<p>The <b>deployment.yaml</b> includes the Kubernetes deployment and service API objects with the specifications for our cluster master node to provision and manage our microservice resources. Additional objects could be added under this file, by using the <b>---</b> triple dash separator. </p>
 
 <p>Note on environment variables:<br>
-<b>Never commit service credentials and secrets dependencies into your code repository. It is suggested that you create a secrets yaml file in your local workstation and store it in a storage media or storage cloud service that supports encryption at rest to avoid unathorized access.</b></p>
+<b>Never commit service credentials and secrets dependencies into your code repository. It is suggested that you create a secrets yaml file in your local workstation and store it in a storage media or storage cloud service that supports encryption at rest to avoid unauthorized access.</b></p>
 
 <p>Generating Kubernetes Secrets<br>
 https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/
@@ -73,22 +74,22 @@ kubectl create secret generic mysecret --from-literal='cloudant_url=<b><i>url-st
 </p>
 
 <p>Next we will configure the toolchain service to handle the deployment of our microservice.<br>
-Configuring the IBM Cloud toolchain automation:
+To configure the IBM Cloud toolchain automation, follow these instructions:
 </p>
 <li>Log into IBM Cloud with your credentials</li>
 <li>Navigate to your target IKS cluster overview page</li>
 <li>Click on devops, from the left side menu</li>
 <li>Click on Create a toolchain+ button</li>
 <li>Click on the Develop a Kubernete app box</li>
-<li>Add a Toolchain Name</li>
-<li>Specify the region and the resource group</li>
-<li>Select provider GitHub</li>
-<li>Authorize the toolchain automation to access your GitHub repository</li>
-<li>Select Existing for the Repository type</li>
-<li>Specify the Repository URL: paste your cloned / forked repository</li>
+<li>Add a Toolchain Name (e.g. simple-api)</li>
+<li>Specify the region and the resource group that matches your IBM Kubernetes Service</li>
+<li>Select a source provider: Git Repos and Issue Tracking</li>
+<li>not needed: Authorize the toolchain automation to access your GitHub repository</li>
+<li>Select Clone for the Repository type</li>
+<li>Specify the Repository URL as https://github.com/jirau/simple-api </li>
 <li>leave other values unchanged</li>
 <li>click on Delivery pipeline tab</li>
-<li>app name: simple-api</li>
+<li>app name: w.g simple-api</li>
 <li>provide an existing IBM Cloud API key or create a new key (link on instructions)</li>
 <li>select a valid container registry-region (location doesn't have to match the cluster location)</li>
 <li>select a valid registry namespace where you would like to have the toolchain upload images to</li>
@@ -97,3 +98,5 @@ Configuring the IBM Cloud toolchain automation:
 
 what could go wrong?
 - containers can't access your secrets (secrets created on the wrong namespace)
+
+
