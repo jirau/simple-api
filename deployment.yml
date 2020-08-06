@@ -29,7 +29,7 @@
           app: simple-api
       spec:
         containers:
-        - name: loopback-api-kube
+        - name: simple-api
           image: image-file-will-be-overwritten-by-the-ibm-cloud-cicd-toolchain
           imagePullPolicy: IfNotPresent
           ports:
