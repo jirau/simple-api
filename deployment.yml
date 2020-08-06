@@ -19,7 +19,7 @@
   metadata:
     name: simple-api
   spec:
-    replicas: 1
+    replicas: 2
     selector:
       matchLabels:
         app: simple-api
@@ -30,7 +30,7 @@
       spec:
         containers:
         - name: loopback-api-kube
-          image: image-file-overwritten-by-ibm-cloud-cicd
+          image: image-file-will-be-overwritten-by-the-ibm-cloud-cicd-toolchain
           imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 3000
