@@ -129,7 +129,7 @@ From the home-page, and to test that the simple-api can connect to our Cloudant 
 > what could go wrong?
 > * The toolchain fails on the DEPLOY stage, as the container is not able to start due to failure to access secrets (secrets created on the wrong namespace)
 
-This completes our tutorial. Hope you were able to find it beneficial. The deployment pattern presented on this tutorial can be followed for other types of containerized applications. In addition, other networking configurations (such as Ingress, TLS, etc.) can be also configured by including the additional Kubernetes API Objects on the deployment.yaml file. As an alternarive to the simple NodePort configuration.
+This completes our tutorial. Hope you were able to find it beneficial. The deployment pattern presented on this tutorial can be followed for other types of containerized applications. In addition, and as an alternarive to the simple NodePort configuration, other networking options (such as Ingress, TLS, etc.), can be also configured by including the additional Kubernetes API Objects on the deployment.yaml file.
 
 <p style="color:gray;">Collaborators:<br>
 Ariel Jirau | jirau@us.ibm.com<br>
