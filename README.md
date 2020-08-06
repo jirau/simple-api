@@ -1,17 +1,15 @@
-## Draft: Not Ready
-
 <p style="color:gray;">Collaborators:<br>
 Ariel Jirau | jirau@us.ibm.com<br>
 Sarah Allen | sarah.allen@ibm.com</p>
 
 ### Tutorial: Deploying a cloud-native microservice in the IBM Kubernetes Service, going beyond deploying a Hello World application container.
 
-By following this tutorial, you will be able to exercise all the steps necessary to deploy a cloud-native microservice in the IBM Kubernetes Service (IKS) leveraging IBM Cloud's toolchain automation tools.
+By following this tutorial, you will be able to exercise all the steps necessary to deploy a cloud-native microservice in the IBM Kubernetes Service (IKS) by leveraging IBM Cloud's toolchain automation tools.
 
 **Prerequisites**
 * You will need an IBM Cloud Account. If you don't have one, you can sign up for a free [trial](https://cloud.ibm.com/).
 * Verify that toolchains and tool integrations are available in your region and IBM Cloud environment.
-* You will need a IBM Kubernetes Service cluster. At the time of this writing, IBM Cloud offers a 30 days free trial for a multi-node cluster.
+* You will need a IBM Kubernetes Service cluster (IKS). At the time of this writing, IBM Cloud offers a 30 days free trial on IKS clusters.
 * You will need to provision an instance of the IBM Cloudant Database service. A Lite tier which it is free is also available.
 
 For this tutorial, we will be deploying a simple cloud-native api, using the IBM Cloud toolchain to containerize, store the image on a Cloud based private container registry and then deploy it to our target Kubernetes cluster.
@@ -27,8 +25,8 @@ To start, we will need to provision our Database service.
 
 ### Step 1: Provisioning and Configuring the IBM Cloudant Service
 1. Log into your IBM Cloud Account
-1. From the dashboard, click **|Create Resource+|**
-1. Use the **|Search the catalog..|** bar and search for *Cloudant*
+1. From the dashboard, click **| Create Resource+ |**
+1. Use the **| Search the catalog.. |** bar and search for *Cloudant*
 1. Click on the *Cloudant Service box* option
 1. Change the Authentication method from IAM, to **IAM and legacy credentials**
 1. Ensure Lite plan is selected (note: this is a free tier plan)
@@ -132,8 +130,9 @@ From the home-page, and to test that the simple-api can connect to our Cloudant 
 * Use the GET/items/count to get a record count of the entered items.
 * Use the GET/items endpoint to retrieve all existing records (note: delete the default filter to avoid errors).
 
-
 > what could go wrong?
-> * container fails to start, as container can't access your secrets (secrets created on the wrong namespace)
+> * The toolchain fails on the DEPLOY stage, due to the container failing to start due to failure to access secrets (secrets created on the wrong namespace)
+
+This completes our tutorial. Hope you were able to find it beneficial. The deployment pattern presented on this tutorial can be followed for other types of containerized applications. In addition, other networking configurations (such as Ingress, TLS, etc.) can be also configured by including the additional Kubernetes API Objects on the deployment.yaml file. As an alternarive to the simple NodePort configuration.
 
 
