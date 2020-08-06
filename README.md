@@ -90,7 +90,7 @@ $ kubectl create secret generic mysecret --from-literal='cloudant_url=<url-strin
 
 **Please be aware of the the following IBM Cloud toolchain dependencies for deploying containers on your IKS cluster:**<br>
 There are two files that are required by the toolchain automation to deploy our microservice on the IBM Kuberenetes Service cluster. These two files are, a 1) **Dockerfile** and a 2) **deployment.yaml**. <br>
-Docker builds images automatically by reading the instructions from the [*Dockerfile*](https://docs.docker.com/engine/reference/builder/). The **Dockerfile** contains all the instructions and specifications, needed to build a given image.<br>
+Docker builds images automatically by reading the instructions from the [*Dockerfile*](https://docs.docker.com/engine/reference/builder/). The **Dockerfile** contains all the instructions and specifications needed to build a given image.<br>
 The **deployment.yaml** includes the Kubernetes deployment and service API objects with specifications for our cluster master node to provision and manage our microservice resources. Additional objects could be included on this file, by using the **---** triple dash separator.
 
 
@@ -127,7 +127,7 @@ From the home-page, and to test that the simple-api can connect to our Cloudant 
 * Use the GET/items endpoint to retrieve all existing records (note: delete the default filter to avoid errors).
 
 > what could go wrong?
-> * The toolchain fails on the DEPLOY stage, due to the container failing to start due to failure to access secrets (secrets created on the wrong namespace)
+> * The toolchain fails on the DEPLOY stage, as the container is not able to start due to failure to access secrets (secrets created on the wrong namespace)
 
 This completes our tutorial. Hope you were able to find it beneficial. The deployment pattern presented on this tutorial can be followed for other types of containerized applications. In addition, other networking configurations (such as Ingress, TLS, etc.) can be also configured by including the additional Kubernetes API Objects on the deployment.yaml file. As an alternarive to the simple NodePort configuration.
 
