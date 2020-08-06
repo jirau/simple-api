@@ -1,7 +1,3 @@
-<p style="color:gray;">Collaborators:<br>
-Ariel Jirau | jirau@us.ibm.com<br>
-Sarah Allen | sarah.allen@ibm.com</p>
-
 ### Tutorial: Deploying a cloud-native microservice in the IBM Kubernetes Service, going beyond deploying a Hello World application container.
 
 By following this tutorial, you will be able to exercise all the steps necessary to deploy a cloud-native microservice in the IBM Kubernetes Service (IKS) by leveraging IBM Cloud's toolchain automation tools.
@@ -135,4 +131,6 @@ From the home-page, and to test that the simple-api can connect to our Cloudant 
 
 This completes our tutorial. Hope you were able to find it beneficial. The deployment pattern presented on this tutorial can be followed for other types of containerized applications. In addition, other networking configurations (such as Ingress, TLS, etc.) can be also configured by including the additional Kubernetes API Objects on the deployment.yaml file. As an alternarive to the simple NodePort configuration.
 
-
+<p style="color:gray;">Collaborators:<br>
+Ariel Jirau | jirau@us.ibm.com<br>
+Sarah Allen | sarah.allen@ibm.com</p>
