@@ -1,6 +1,9 @@
 ### Tutorial: Deploying a cloud-native microservice in the IBM Kubernetes Service, going beyond deploying a Hello World application container.
 
-By following this tutorial, you will be able to exercise all the steps necessary to deploy a cloud-native microservice in the IBM Kubernetes Service (IKS) by leveraging IBM Cloud's toolchain automation tools.
+Continous integration and continous delivery (CI/CD) models and technologies have become a critical aspects for enterprises adopting DevOps and cloud-native development. Complexities, skill and knowledge gaps can be significant inhibitors for entry and for adoption at a larger scale.
+Pipeline tools that provide CI/CD automation, ease of configuration and operation allows application developers to efficiently embrace and incorporate these tools into their projects.
+
+By following this tutorial, you will be able to exercise all the steps necessary to deploy a fully functional cloud-native microservice in the IBM Kubernetes Service (IKS) by leveraging IBM Cloud's toolchain automation tools.
 
 **Prerequisites**
 * You will need an IBM Cloud Account. If you don't have one, you can sign up for a free [trial](https://cloud.ibm.com/).
@@ -12,7 +15,7 @@ For this tutorial, we will be deploying a simple cloud-native api, using the IBM
 
 We will use the code stored in this repository as our sample microservice, which we will refer to as the **simple-api**.
 The simple-api is a basic nodejs microservice that exposes data via a http RESTful API. The API is based on the loopback4 framework. A simple data model with the name 'items' is included for testing purposes. You can find more information about the loopback framework [here](https://loopback.io/). In conjunction with the api, an IBM Cloud Cloudant Database is also needed and used as our data store, where we will store our 'item' records.
-The following diagram depicts how our micro-service environment will look like after the automated deployment is completed.
+The following diagram depicts how our micro-service environment will look like after our automated deployment is completed.
 
 ![Environment Overview](./images/env-overview.png)
 
@@ -36,18 +39,18 @@ Next, we will need to create the necessary Cloudant service credentials, to allo
 1. On the Create credentials, select *Writer* as the Role: (Note: see the following diagram for the 3 credential elements that will be used on the next step to configure our Kubernetes deployment secrets and environment variables)
 ![Credentials Window](./images/credentials-window.png)
 
-To finalize our Database configuration, we must create a Database, which will be then be exposed by our simple-api container.
+To finalize our Database configuration, we must create a Database, which will be exposed by our simple-api container.
 1. On the Cloudant service page, click on Manage, and then click on the Launch Dashboard button and log with your IBMid credentials.
 1. On the Database section of the Cloudant Dashboard, click on **| Create Database |** on the upper toolbar.
 1. On the Create Database window, enter **'items'** (ensure all lower caps) as the Database name, click on the *Non-Partitioned radio button*, then click the **| Create |** button.
 1. You can now close the dashboard, as no other steps are needed related to the Cloudant Database service.
 
 ### Step 2: Configuring and Applying Secrets to our IKS Cluster
-To enable access from the microservice to the Cloudant Database Service, we need to securely share environment variables to simple-api pod containers via **Kubernetes Secrets**.<br>
+To enable access from the microservice to the Cloudant Database Service, we need to securely share environment variables to the simple-api pod containers via **Kubernetes Secrets**.<br>
 Kubernetes Secrets allow us to store and manage sensitive information, such as passwords, user access credentials, Authorization tokens, and ssh keys.
 
 > **Note on service credentials and secrets:**<br>
-> Never commit service credentials and secrets dependencies into your code repository. It is suggested that you create a Kuberenets Secrets **yaml** file in your local workstation and store it in a secure location with encryption and access controls, such as IBM Cloud Object Storage service. Alternatively, you can delete the file, or delete the credentials information and store the file as a template for later use.
+> Never commit service credentials and secret dependencies into your code repository. It is suggested that you create a Kuberenets Secrets **yaml** file in your local workstation and store it in a secure location with encryption at rest and access controls, such as the IBM Cloud Object Storage service. Alternatively, you can delete the file after use, or remove the credentials information from the configuration and save the file as a template for later use.
 
 We will need to configure three **(3) Kubernetes Secrets** to store our Cloudant services credentials, to enable access from the simple-api microservice container to the Database. These 3 variables are, 1) *cloudant_url*, 2) *cloudant_user*, and 3) *cloudant_password*
 
@@ -57,7 +60,7 @@ Alternatively, you can use a base64 online encoder.
 ```shell
 $ echo -n <secret-string> | base64
 ```
-Then, add the encoded strings to the corresponding data elements in your Secret yaml file. Use the following format in the editor of your choice and save with a yml or yaml extension.<br>
+Then, add the encoded strings to the corresponding data elements in your Secret yaml file. Use the following format in the editor of your choice and save the file with a yml or yaml extension.<br>
 note: you will need to create this file as it is not included in the code repository. **Do not store or commit this file with your code**.
 
 ```yml
@@ -82,7 +85,7 @@ Alternatively, you can also set secrets using the following imperative kubectl c
 $ kubectl create secret generic mysecret --from-literal='cloudant_url=<url-string>' --from-literal='cloudant_user=<user-name-string>' --from-literal='cloudant_password=<password-string>'
 ```
 
-[Click this link for detailed instructions on creating and managing Kubernetes secrets](https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/)
+[Detailed instructions on creating and managing Kubernetes secrets, can be found here](https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/)
 
 ### Step 3: Configuring the IBM Automated Toolchain
 > In this step we will use the toolchain clone option, to clone or copy the simple-api [code](https://github.com/jirau/simple-api.git) into our own repository. As an alternative, you could clone the code outside of the toolchain process and select the *Existing* repository option. (you will need to authorize the toolchain to access your repository)<br>
@@ -106,7 +109,7 @@ To configure the IBM Cloud toolchain automation, follow these instructions:
 ![image](./images/toolchain-config1.png)
 1. Next, provide an existing IBM Cloud API key or create a new key [(link to instructions)](https://cloud.ibm.com/docs/account?topic=account-userapikey). You can also create a new key in this screen by clicking the **| New+ |** button.
 ![image](./images/toolchain-config2.png)
-1. Next, select the region of the container registry you intent to use (the container registry location can be different than your ISK cluster location) [see registry getting started](https://cloud.ibm.com/docs/Registry?topic=Registry-getting-started)
+1. Next, select the region of the container registry you intent to use (the container registry location can be different than your IKS cluster location) [see registry getting started](https://cloud.ibm.com/docs/Registry?topic=Registry-getting-started)
 ![image](./images/toolchain-config3.png)
 1. Next, select a valid registry namespace where you would like to have the toolchain upload the simple-api Docker image after the build process.
 1. Next, ensure the cluster region, resource group, and cluster name all match your target cluster.
@@ -127,7 +130,7 @@ From the home-page, and to test that the simple-api can connect to our Cloudant 
 * Use the GET/items endpoint to retrieve all existing records (note: delete the default filter to avoid errors).
 
 > what could go wrong?
-> * The toolchain fails on the DEPLOY stage, as the container is not able to start due to failure to access secrets (secrets created on the wrong namespace)
+> * The toolchain fails on the DEPLOY stage, as the container is not able to start due to failure to access secrets (secrets created on the wrong Kubernetes namespace)
 
 This completes our tutorial. Hope you were able to find it beneficial. The deployment pattern presented on this tutorial can be followed for other types of containerized applications. In addition, and as an alternarive to the simple NodePort configuration, other networking options (such as Ingress, TLS, etc.), can be also configured by including the additional Kubernetes API Objects on the deployment.yaml file.
 
