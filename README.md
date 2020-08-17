@@ -113,13 +113,12 @@ To configure the IBM Cloud toolchain automation, follow these instructions:
 **3)** Repository Name: name of your target repository (all the other options on this tab can remain unchanged)
 ![image](./images/toolchain-config2.png)
 1. Next, provide an existing IBM Cloud API key or create a new key [(link to instructions)](https://cloud.ibm.com/docs/account?topic=account-userapikey). You can also create a new key in this screen by clicking the **| New+ |** button.<br>
-Ensure that the cluster **namespace** exist in your cluster. The entry will default to **prod**. For simplicity, we are using **default** on this example. if you are deploying your microservice outside the default namespace, you must also specify the target namespace on the secrets yaml file by including an additional entry under the metadata: property (namespace: < namespace name >)
 ![image](./images/toolchain-config3.png)
 1. Next, select the region of the container registry you intent to use (the container registry location can be different than your IKS cluster location) [see registry getting started](https://cloud.ibm.com/docs/Registry?topic=Registry-getting-started)
-![image](./images/toolchain-config4.png)
 1. Next, select a valid registry namespace where you would like to have the toolchain upload the simple-api Docker image after the build process.
-1. Next, ensure the cluster region, resource group, and cluster name all match your target cluster.
-Important: your **cluster namespace** must match the Kubernetes **namespace** you used to store your Kubernetes secrets, otherwise the simple-api containers will not be able to have access to the required access credential secrets.
+1. Next, ensure the cluster region, resource group, and cluster name all match your target cluster.<br>
+Important: your **cluster namespace** must match the Kubernetes **namespace** you used to store your Kubernetes secrets, otherwise the simple-api containers will not be able to have access to the required access credential secrets.<br>
+The namespace entry will default to **prod**. For simplicity, we are using **default** on this example. if you are deploying your microservice outside the default namespace, you must also specify the target namespace on the secrets yaml file by including an additional entry under the metadata: property (namespace: < namespace name >)
 1. Next, click **| Create |**
 
 > Now that that the toolchain configuration is completed, you can follow progress and see detailed logging information by stage. From the toolchain Overview page, Click on the **|  Delivery Pipeline  |** box. You will be presented with the Delivery Pipeline page.
