@@ -107,10 +107,17 @@ To configure the IBM Cloud toolchain automation, follow these instructions:
 ![image](./images/pick-a-template.png)
 1. Next, add a Toolchain Name *(e.g. simple-api)*. Keep all the other options as is.
 ![image](./images/toolchain-config1.png)
-1. Next, provide an existing IBM Cloud API key or create a new key [(link to instructions)](https://cloud.ibm.com/docs/account?topic=account-userapikey). You can also create a new key in this screen by clicking the **| New+ |** button.
+1. Next, specify your git repository configuration. As follow,
+* Repository type: **Clone**
+* Source repository URL: https://github.com/jirau/simple-api (the code on this repository will be used as a starting point, and cloned into our target repository)
+* Repository Name: *this is the name of your target repository)
+* All the other options on this tab can remain unchanged.
+
 ![image](./images/toolchain-config2.png)
-1. Next, select the region of the container registry you intent to use (the container registry location can be different than your IKS cluster location) [see registry getting started](https://cloud.ibm.com/docs/Registry?topic=Registry-getting-started)
+1. Next, provide an existing IBM Cloud API key or create a new key [(link to instructions)](https://cloud.ibm.com/docs/account?topic=account-userapikey). You can also create a new key in this screen by clicking the **| New+ |** button.
 ![image](./images/toolchain-config3.png)
+1. Next, select the region of the container registry you intent to use (the container registry location can be different than your IKS cluster location) [see registry getting started](https://cloud.ibm.com/docs/Registry?topic=Registry-getting-started)
+![image](./images/toolchain-config4.png)
 1. Next, select a valid registry namespace where you would like to have the toolchain upload the simple-api Docker image after the build process.
 1. Next, ensure the cluster region, resource group, and cluster name all match your target cluster.
 Important: your **cluster namespace** must match the Kubernetes **namespace** you used to store your Kubernetes secrets, otherwise the simple-api containers will not be able to have access to the required access credential secrets.
