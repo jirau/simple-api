@@ -107,12 +107,10 @@ To configure the IBM Cloud toolchain automation, follow these instructions:
 ![image](./images/pick-a-template.png)
 1. Next, add a Toolchain Name *(e.g. simple-api)*. Keep all the other options as is.
 ![image](./images/toolchain-config1.png)
-1. Next, specify your git repository configuration. As follow,
-* Repository type: **Clone**
-* Source repository URL: https://github.com/jirau/simple-api (the code on this repository will be used as a starting point, and cloned into our target repository)
-* Repository Name: *this is the name of your target repository)
-* All the other options on this tab can remain unchanged.
-
+1. Next, specify your git repository configuration. As follow,<br>
+**1)** Repository type: Clone<br>
+**2)** Source repository URL: https://github.com/jirau/simple-api (the code on this repository will be used as a starting point, and cloned into our target repository)<br>
+**3)** Repository Name: name of your target repository (all the other options on this tab can remain unchanged)
 ![image](./images/toolchain-config2.png)
 1. Next, provide an existing IBM Cloud API key or create a new key [(link to instructions)](https://cloud.ibm.com/docs/account?topic=account-userapikey). You can also create a new key in this screen by clicking the **| New+ |** button.
 ![image](./images/toolchain-config3.png)
