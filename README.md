@@ -1,4 +1,4 @@
-### Tutorial: Deploying a cloud-native microservice in the IBM Kubernetes Service, going beyond deploying a Hello World application container.
+### Tutorial: Deploying a cloud-native microservice in the IBM Kubernetes Service, going beyond a Hello World container deployment.
 
 Continuous integration and continuous delivery (CI/CD) models and technologies have become a critical aspect for enterprises adopting DevOps and cloud-native development. Complexities, skill and knowledge gaps can be significant inhibitors for entry and for adoption at a larger scale.
 Pipeline tools that provide CI/CD automation, ease of configuration and operation allows application developers to efficiently embrace and incorporate these tools into their projects.
