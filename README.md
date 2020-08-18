@@ -56,7 +56,7 @@ We will need to configure three **(3) Kubernetes Secrets** to store our Cloudant
 
 **Generating Kubernetes Secrets**<br>
 When you apply Secrets to your Kubernetes cluster via yaml file, the secret strings must be encoded in base64. To generate the base64 encoded strings in MacOS or Linux, open the terminal and execute the following commands for the 3 required credentials.<br>
-Alternatively, you can use a base64 online encoder.
+Alternatively, you can use a base64 online encoder (not recommended for production).
 ```shell
 $ echo -n <secret-string> | base64
 ```
